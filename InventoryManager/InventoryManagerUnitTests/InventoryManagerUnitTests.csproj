@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpirationMonitorUnitTests.cs" />
+    <Compile Include="ShelfUnitTests.cs" />
     <Compile Include="WorkerAPITests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

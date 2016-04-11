@@ -36,13 +36,13 @@ namespace InventoryManager
                 Shelf shelf;
                 if (_storage.TryGetValue(deserializedItem.Sku, out shelf))
                 {
-                    //for now we only add 1 at a time but if the reqiurements change my worker can add more at a time. 
-                    shelf.Quantity = 1;
+                    shelf.Add(deserializedItem);
                     _storage[deserializedItem.Sku] = shelf;
                 }
                 else
                 {
-                    shelf = new Shelf {Item = deserializedItem, Quantity = 1};
+                    shelf = new Shelf();
+                    shelf.Add(deserializedItem);
                     _storage.Add(deserializedItem.Sku, shelf);
                 }
             }
@@ -74,10 +74,10 @@ e.g. {'Label': 'Tuna',
                 }
                 if (inventory > 0)
                 {
-                    shelf.Quantity = -1;
+                    var returnItem = shelf.GetItem();
                     _storage[sku] = shelf;
                     _notifier.Notify($@"Stock has changed for sku:{sku} from:{inventory} to:{shelf.Quantity}");
-                    returnVal = JsonConvert.SerializeObject(shelf.Item);
+                    returnVal = JsonConvert.SerializeObject(returnItem);
                 }
             }
             else
