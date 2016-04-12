@@ -6,12 +6,12 @@ namespace InventoryManager
 {
     public class WorkerAPI
     {
-        //This is to replace the "DB Code"
-        private readonly Dictionary<int, Shelf> _storage = new Dictionary<int, Shelf>();
         //This is to replace the "Identity Provider
         private readonly IdP _idp = new IdP();
         //yet again this notifier is mocked.
         private readonly INotifier _notifier;
+        //This is to replace the "DB Code"
+        private readonly Dictionary<int, Shelf> _storage = new Dictionary<int, Shelf>();
 
         public WorkerAPI(INotifier notifier)
         {
@@ -24,7 +24,7 @@ namespace InventoryManager
             {
                 //in real life redirect either with 302 or perhaps send them to a different code flow if not HTTP request API
             }
-            
+
             if (item == null || item.Equals(""))
             {
                 throw new ArgumentException("item must not be null or empty");
@@ -61,7 +61,7 @@ e.g. {'Label': 'Tuna',
         {
             int sku;
             int.TryParse(s, out sku);
-            string returnVal =""; 
+            var returnVal = "";
             Shelf shelf;
             if (_storage.TryGetValue(sku, out shelf))
             {
@@ -69,6 +69,7 @@ e.g. {'Label': 'Tuna',
                 var inventory = shelf.Quantity;
                 if (inventory == 0)
                 {
+                    //Could wrap the notifier such that it only notifies if it is specified that this is a notifying API.
                     _notifier.Notify("We are out of stock for sku: " + sku);
                     returnVal = "Out of Stock";
                 }
@@ -88,4 +89,3 @@ e.g. {'Label': 'Tuna',
         }
     }
 }
-

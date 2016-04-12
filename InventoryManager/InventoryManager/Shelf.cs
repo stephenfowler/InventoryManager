@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace InventoryManager
 {
     public class Shelf
     {
-        private readonly List<Item> _stock = new List<Item>(); 
+        private readonly List<Item> _stock = new List<Item>();
         private int _quantity;
-        public int Quantity {
+
+        public int Quantity
+        {
             get { return _quantity; }
             set { _quantity = _quantity + value; }
         }

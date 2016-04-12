@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManager
 {
@@ -11,8 +7,8 @@ namespace InventoryManager
     {
         //Dependencies for testing. 
         //Something that would have to be evaluated if this was actually production code. 
-        private INotifier _notifier;
-        private Shelf _shelf;
+        private readonly INotifier _notifier;
+        private readonly Shelf _shelf;
 
         public ExpirationMonitor(INotifier notifier, Shelf shelf)
         {
@@ -23,8 +19,8 @@ namespace InventoryManager
 
         public void ExpungeExpiredItems()
         {
-            DateTime now = DateTime.Now;
-            ArrayList goodItems = new ArrayList();
+            var now = DateTime.Now;
+            var goodItems = new ArrayList();
             while (_shelf.Quantity > 0)
             {
                 var current = _shelf.GetItem();
