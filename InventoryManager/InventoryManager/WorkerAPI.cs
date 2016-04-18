@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace InventoryManager
 {
-    public class WorkerAPI
+    public class WorkerAPI : IWorkerAPI
     {
         //This is to replace the "Identity Provider
         private readonly IdP _idp = new IdP();
@@ -57,8 +57,9 @@ e.g. {'Label': 'Tuna',
             }
         }
 
-        public string Retrieve(string s)
+        public string Retrieve(string s, string authToken)
         {
+            //for now ignore authToken
             int sku;
             int.TryParse(s, out sku);
             var returnVal = "";

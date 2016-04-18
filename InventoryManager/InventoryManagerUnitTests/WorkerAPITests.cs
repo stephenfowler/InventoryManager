@@ -21,7 +21,7 @@ namespace InventoryManagerUnitTests
         [Test]
         public void Retrieve_with_invalid_data_does_not_retrieve()
         {
-            var retrievedItem = _worker.Retrieve("2");
+            var retrievedItem = _worker.Retrieve("2", "ignored");
             Assert.AreEqual("not found", retrievedItem);
         }
 
@@ -38,7 +38,7 @@ namespace InventoryManagerUnitTests
             };
             var stringItem = JsonConvert.SerializeObject(item);
             _worker.Add(stringItem, "authorized");
-            var retrievedItem = _worker.Retrieve("9");
+            var retrievedItem = _worker.Retrieve("9", "ignored");
 
             Assert.AreEqual(stringItem, retrievedItem);
             _notifierMock.Verify();
@@ -57,10 +57,10 @@ namespace InventoryManagerUnitTests
             };
             var stringItem = JsonConvert.SerializeObject(item);
             _worker.Add(stringItem, "authorized");
-            var retrievedItem = _worker.Retrieve("9");
+            var retrievedItem = _worker.Retrieve("9", "ignored");
 
             Assert.AreEqual(stringItem, retrievedItem);
-            retrievedItem = _worker.Retrieve("9");
+            retrievedItem = _worker.Retrieve("9", "ignored");
 
             Assert.AreEqual("Out of Stock", retrievedItem);
             _notifierMock.Verify();
