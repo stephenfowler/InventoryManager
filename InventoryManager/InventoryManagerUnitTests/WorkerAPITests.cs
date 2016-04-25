@@ -68,6 +68,25 @@ namespace InventoryManagerUnitTests
         }
 
         [Test]
+        public void Retrieve_with_only_expired_stock_returns_no_data()
+        {
+            _notifierMock.Setup(n => n.Notify(It.IsAny<string>()));
+            var item = new Item
+            {
+                Description = "Peanut Butter",
+                Expiration = DateTime.Today.Subtract(TimeSpan.FromDays(2)),
+                Label = "Peanut Butter",
+                Sku = 9
+            };
+            var stringItem = JsonConvert.SerializeObject(item);
+            _worker.Add(stringItem, "authorized");
+            var retrievedItem = _worker.Retrieve("9");
+
+            Assert.AreEqual("Out of Stock", retrievedItem);
+            _notifierMock.Verify();
+        }
+
+        [Test]
         public void WorkerAPI_Add_succeeds()
         {
             Assert.DoesNotThrow(delegate { _worker.Add(@"{

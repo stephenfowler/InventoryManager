@@ -78,6 +78,10 @@ e.g. {'Label': 'Tuna',
                     var returnItem = shelf.GetItem();
                     _storage[sku] = shelf;
                     _notifier.Notify($@"Stock has changed for sku:{sku} from:{inventory} to:{shelf.Quantity}");
+                    if (returnItem.Expiration < DateTime.Today)
+                    {
+                       return Retrieve(s);
+                    }
                     returnVal = JsonConvert.SerializeObject(returnItem);
                 }
             }
