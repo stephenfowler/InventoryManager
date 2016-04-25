@@ -1,8 +1,9 @@
 ﻿using System;
-using InventoryManager;
+using WebAPI;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using WebAPI.Models;
 
 namespace InventoryManagerUnitTests
 {

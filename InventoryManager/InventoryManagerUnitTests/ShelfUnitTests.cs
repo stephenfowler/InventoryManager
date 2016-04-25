@@ -1,6 +1,6 @@
 ﻿using System;
-using InventoryManager;
 using NUnit.Framework;
+using WebAPI.Models;
 
 namespace InventoryManagerUnitTests
 {

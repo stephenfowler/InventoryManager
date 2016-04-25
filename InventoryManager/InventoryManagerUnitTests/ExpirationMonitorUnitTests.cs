@@ -1,7 +1,7 @@
 ﻿using System;
-using InventoryManager;
 using Moq;
 using NUnit.Framework;
+using WebAPI.Models;
 
 namespace InventoryManagerUnitTests
 {

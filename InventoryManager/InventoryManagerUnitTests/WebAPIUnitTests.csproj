@@ -58,12 +58,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InventoryManager\InventoryManager.csproj">
-      <Project>{65083725-b651-4a55-925b-174b4812bd6d}</Project>
-      <Name>InventoryManager</Name>
+    <ProjectReference Include="..\WebAPI\WebAPI.csproj">
+      <Project>{28F4B663-E517-4598-9F93-D6ED1A53A5C3}</Project>
+      <Name>WebAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
