@@ -3,7 +3,7 @@
 ## How to run
 1. Pull down the repo.
 2. Open the Solution with Visual Studio which should also install the Nuget packages for its dependencies.
-3. Right click on the InventoryManagerUnitTests package inside of Solution Explorer and run all tests. 
+3. Right click on the WebAPIUnitTests package inside of Solution Explorer and run all tests. 
 
 
 ## Assumptions: ##
@@ -11,8 +11,8 @@
 * Prefered boundary crossing structure is JSON 
 * Authentication will be mocked
 * Notification mechanism will be mocked and simplistic.
-* Frequently I think of APIs being something that is tied to HTTP, however, for this exercise I am not going to build it with HTTP wrapping frameworks because a good API may be just something internal. It should be simple enough to update it to be a public facing API via HTTP. 
-
+* Frequently I think of APIs being something that is tied to HTTP. I added a super simple and untested WEB API on top of my models. I won't apologize for the current untested state because I simply haven't had time to give it at this time. 
+* The cleanup would be run daily in some sort of server side job. That is my assumption and there isn't anything in the Web API for it. 
 
 ## Notes: ##
 ####Initial thoughts reading specs: 
@@ -33,11 +33,10 @@ There should be a notifications provider such that I can hand it a message and i
 
 - I don't like overloading the API with a bunch of notifications and this project had a lot of "side effects" that I don't like. I don't like my API having notifications as a side effect. Additionally I am not crazy about having the Retrieve clean up the expired items. Because I don't like side effects I created an "ExpirationMonitor" class that would ideally be run on the storage system on a regular basis (daily). 
 
-- I chose not to put an Http request structure on my API but I think that it would have been good to do so, since that was what I was aiming for in the long run, and that is how I have been considering the IdP, and authorization etc. 
-
 - This project would have been better if I had taken more time to create a storage mechanism that was outside of the WorkerAPI class. I created a Shelf class and that is what the ExpirationMonitor looks at to remove expired items but you would have to run that on the larger storage system. 
 
 - I didn't like that I ended up putting parameters into the constructor for WorkerAPI for testing purposes. The way I did it is fine, but I am always a bit hesitant about making changes to production code for testing reasons.
 
 ####Final thoughts:
-As I progressed through the exercise I regretted not making it wrapped up with HTTP POST GET etc because my initial thought was that way and as such there were some decisions that didn't make tons of sense outside of that context (e. g. using strings and a JSON convert to pass things between my "boundaries"). There are several things that I would clean up in a secondary version for example putting the dictionary of "shelves" in a class of its own instead of making it be persisted inside the WorkerAPI. I probably should have done a little more strict mocking in the WorkerAPI tests but I have found that if I test to strictly it becomes very combersome and pushes me into making integration tests. Generally I prefer to have many unit tests and fewer integration tests since integration tests are more prone to slowness. 
+Due to a serious crunch time that I have at work I haven't had much time to devote to making this work. Please still run through the unit tests. I did put an HTTP framework around the code but I didn't make it work (or even test it). 
+
